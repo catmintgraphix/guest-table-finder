@@ -8,8 +8,18 @@
       background-color: #fdfaf6; /* off-white base */
       font-family: 'Georgia', serif;
       text-align: center;
-      margin-top: 80px;
+      margin-top: 60px;
       color: #4b3d33; /* deep earth brown */
+    }
+
+    .welcome-image {
+      display: block;
+      margin: 0 auto 30px;   /* center horizontally, spacing below */
+      max-width: 600px;      /* large size on desktop */
+      width: 100%;           /* responsive scaling */
+      height: auto;          /* keep proportions */
+      border-radius: 12px;   /* optional rounded corners */
+      box-shadow: 0 6px 16px rgba(75, 61, 51, 0.3); /* elegant shadow */
     }
 
     h1 {
@@ -59,6 +69,9 @@
   </style>
 </head>
 <body>
+  <!-- Welcome image ABOVE the heading -->
+  <img src="welcome.png" alt="Welcome" class="welcome-image">
+
   <h1>Find Your Table</h1>
   <input type="text" id="guestName" placeholder="Enter your name">
   <button onclick="findTable()">Search</button>
