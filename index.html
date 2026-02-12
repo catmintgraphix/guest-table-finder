@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guest Table Finder</title>
+  <style>
+    body {
+      background-color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 5px;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Find Your Table</h1>
+  <input type="text" id="guestName" placeholder="Enter your name">
+  <button onclick="findTable()">Search</button>
+  <div id="result"></div>
+
+  <script>
+    // Example guest list
+    const guestList = {
+      "Aaron": "Table 5",
+      "Maria": "Table 2",
+      "John": "Table 8",
+      "Sophia": "Table 1"
+    };
+
+    function findTable() {
+      const name = document.getElementById("guestName").value.trim();
+      const resultDiv = document.getElementById("result");
+
+      if (guestList[name]) {
+        resultDiv.textContent = `${name}, you are assigned to ${guestList[name]}.`;
+      } else {
+        resultDiv.textContent = "Name not found. Please check spelling.";
+      }
+    }
+  </script>
+</body>
+</html>
