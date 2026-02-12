@@ -28,28 +28,37 @@
   <div id="result"></div>
 
   <script>
-    // Example guest list
-    const guestList = {
-      "Aaron": "Table 5",
-      "Maria": "Table 2",
-      "John": "Table 8",
-      "Sophia": "Table 1"
-    };
+    let guestList = {};
 
-   function findTable() {
-  const name = document.getElementById("guestName").value.trim().toLowerCase();
-  const resultDiv = document.getElementById("result");
+    // Load guest list from guests.json
+    fetch('guests.json')
+      .then(response => response.json())
+      .then(data => {
+        guestList = data;
+      })
+      .catch(error => {
+        console.error("Error loading guest list:", error);
+      });
 
-  // Convert guestList keys to lowercase for comparison
-  const guestEntries = Object.entries(guestList);
-  const match = guestEntries.find(([guest]) => guest.toLowerCase() === name);
+    function findTable() {
+      const input = document.getElementById("guestName").value.trim().toLowerCase();
+      const resultDiv = document.getElementById("result");
 
-  if (match) {
-    resultDiv.textContent = `${match[0]}, you are assigned to ${match[1]}.`;
-  } else {
-    resultDiv.textContent = "Name not found. Please check spelling.";
-  }
-}
+      // Convert guestList into an array of [name, table]
+      const guestEntries = Object.entries(guestList);
+
+      // Find all matches where the input is contained in the guest name (case-insensitive)
+      const matches = guestEntries.filter(([guest]) => guest.toLowerCase().includes(input));
+
+      if (matches.length > 0) {
+        // Show all matches
+        resultDiv.innerHTML = matches
+          .map(([guest, table]) => `${guest} → ${table}`)
+          .join("<br>");
+      } else {
+        resultDiv.textContent = "Name not found. Please check spelling.";
+      }
+    }
   </script>
 </body>
 </html>
