@@ -36,16 +36,20 @@
       "Sophia": "Table 1"
     };
 
-    function findTable() {
-      const name = document.getElementById("guestName").value.trim();
-      const resultDiv = document.getElementById("result");
+   function findTable() {
+  const name = document.getElementById("guestName").value.trim().toLowerCase();
+  const resultDiv = document.getElementById("result");
 
-      if (guestList[name]) {
-        resultDiv.textContent = `${name}, you are assigned to ${guestList[name]}.`;
-      } else {
-        resultDiv.textContent = "Name not found. Please check spelling.";
-      }
-    }
+  // Convert guestList keys to lowercase for comparison
+  const guestEntries = Object.entries(guestList);
+  const match = guestEntries.find(([guest]) => guest.toLowerCase() === name);
+
+  if (match) {
+    resultDiv.textContent = `${match[0]}, you are assigned to ${match[1]}.`;
+  } else {
+    resultDiv.textContent = "Name not found. Please check spelling.";
+  }
+}
   </script>
 </body>
 </html>
